@@ -1,27 +1,28 @@
 <script>
-import axios from 'axios';
+
 export default {
     data() {
         return {
-            img: `https://flagsapi.com/${this.language}/shiny/64.png`
+            flagUrl: `https://flagcdn.com/16x12/${this.language}.png`,
+            posterUrl: `https://image.tmdb.org/t/p/w342${this.endImgUrl}`
         }
+    },
+
+    created(){
+        
     },
 
     components: {
 
     },
 
-    created(){
-        axios.get("https://flagsapi.com/BE/flat/64.png")
-        .then(response)
-        console.log(response);
-    },
-
     props: {
         title : String,
         origTitle: String,
         language: String,
-        vote: Number
+        vote: Number,
+        endImgUrl: String,
+        overview: String
     }
     ,
 
@@ -34,10 +35,14 @@ export default {
 
 <template>
         <div class="myCard">
-            <p>{{ title }}</p>
-            <p>{{ origTitle }}</p>
-            <img :src="img" alt="">
-            <p>{{ vote }}</p>
+            <img :src="posterUrl" alt="" class="img-fluid">
+            <div class="details">
+                <p>Titolo: {{ title }}</p>
+                <p v-if="title != origTitle">Titolo originale: {{ origTitle }}</p>
+                <img :src="flagUrl" alt="">
+                <p>{{ vote }}</p>
+                <p>{{ overview }}</p>
+            </div>
         </div>
 </template>
 

@@ -13,7 +13,7 @@ export default {
     },
 
     props: {
-        movies: Array
+        results: Array
 
     },
 
@@ -25,15 +25,22 @@ export default {
 </script>
 
 <template>
-    <ul>
-        <li v-for="movie in movies">
-            <MovieCard
-                :title="movie.title"
-                :origTitle="movie.original_title"
-                :language="movie.original_language"
-                :vote="movie.vote_average"/>
-        </li>
-    </ul>
+    <div class="container">
+        <slot></slot>
+        <div class="row row-cols-2 row-cols-lg-3">
+                <div class="col" v-for="result in results">
+                     <font-awesome-icon icon="fa-solid fa-star" />
+                    <MovieCard
+                        :title="result.title || result.name"
+                        :origTitle="result.original_title || result.original_name"
+                        :language="result.original_language"
+                        :vote="Math.round(result.vote_average) / 2"
+                        :endImgUrl="result.poster_path"
+                        :overview="result.overview"/>
+                </div>
+
+        </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
