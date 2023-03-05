@@ -11,6 +11,7 @@ export default {
       seriesArray: [],
     }
   },
+
   
   components: {
     AppHeader,
