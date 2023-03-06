@@ -1,10 +1,11 @@
 <script>
-
+import { store } from "../data/store"
 
 export default {
     data() {
         return {
-            term: ""
+            term: "",
+            store
         }
     },
 
@@ -15,9 +16,13 @@ export default {
     methods: {
         clearBar(){
             this.term = "";
+            store.moviesArray = [];
+            store.seriesArray = [];
         },
 
         startSearch(){
+            store.moviesArray = [];
+            store.seriesArray = [];
             this.$emit("searchTerm", this.term);
         }
     }
@@ -34,7 +39,8 @@ export default {
             <form @submit.prevent="">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search..."
-                            v-model="term">
+                            v-model="term"
+                            @keyup.enter="startSearch()">
                     <button class="btn btn-outline-secondary" type="button"
                             @click="startSearch()">
                         Search
