@@ -18,7 +18,7 @@ export default {
     
     methods: {
         getFlag(language) {
-            language = language.toUpperCase();
+            language = language;
             if (language == "it") return "https://flagsapi.com/IT/flat/64.png";
             if (language == "en") return "https://flagsapi.com/GB/flat/64.png";
 
@@ -39,15 +39,14 @@ export default {
                   <p>Titolo: <span class="fw-bold">{{ title }}</span></p>
                   <p v-if="title != origTitle">Titolo originale: {{ origTitle }}</p>
                   <img :src=" getFlag(language) " alt="" class="img-fluid">
-                  <p>{{ vote }}</p> 
-                  <p >
+                  <p>
                     <font-awesome-icon
                     v-for="i in vote" icon="fa-solid fa-star" class="star" />
                     <font-awesome-icon
-                    v-for="i in (5-vote)"
+                    v-for="i in (5 - vote)"
                      icon="fa-regular fa-star" class="star"/>
                   </p>                  
-                  <p>{{ overview }}</p>
+                  <p class="overview">{{ overview }}</p>
               </div>
           </div>
       </div>
@@ -98,6 +97,10 @@ export default {
 
                 .star{
                     color: gold;
+                }
+
+                .overview{
+                    overflow-y: auto;
                 }
 
             }

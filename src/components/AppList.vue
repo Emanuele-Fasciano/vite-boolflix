@@ -1,6 +1,6 @@
 <script>
-import MovieCard from "./MovieCard.vue"
-import { store } from "../data/store"
+import MovieCard from "./MovieCard.vue";
+import { store } from "../data/store";
 
 export default {
     data() {
@@ -15,7 +15,6 @@ export default {
 
     props: {
         results: Array
-
     }
 
 }
