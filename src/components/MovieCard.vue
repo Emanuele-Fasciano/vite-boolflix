@@ -3,17 +3,8 @@
 export default {
     data() {
         return {
-            flagUrl: `https://flagcdn.com/16x12/${this.language}.png`,
             posterUrl: `https://image.tmdb.org/t/p/w342${this.endImgUrl}`
         }
-    },
-
-    created(){
-        
-    },
-
-    components: {
-
     },
 
     props: {
@@ -23,11 +14,16 @@ export default {
         vote: Number,
         endImgUrl: String,
         overview: String
-    }
-    ,
-
+    },
+    
     methods: {
+        getFlag(language) {
+            language = language.toUpperCase();
+            if (language == "it") return "https://flagsapi.com/IT/flat/64.png";
+            if (language == "en") return "https://flagsapi.com/GB/flat/64.png";
 
+            return `https://flagsapi.com/${{ language }}/flat/64.png`;
+    },
     }
 
 }
@@ -40,10 +36,17 @@ export default {
                   <img :src="posterUrl" alt="" class="img-fluid rounded">
               </div>
               <div class="back-card d-flex py-3">
-                  <p class="fw-bold">Titolo: {{ title }}</p>
+                  <p>Titolo: <span class="fw-bold">{{ title }}</span></p>
                   <p v-if="title != origTitle">Titolo originale: {{ origTitle }}</p>
-                  <img :src="flagUrl" alt="">
-                  <p>{{ vote }} <font-awesome-icon icon="fa-solid fa-star" /></p>
+                  <img :src=" getFlag(language) " alt="" class="img-fluid">
+                  <p>{{ vote }}</p> 
+                  <p >
+                    <font-awesome-icon
+                    v-for="i in vote" icon="fa-solid fa-star" class="star" />
+                    <font-awesome-icon
+                    v-for="i in (5-vote)"
+                     icon="fa-regular fa-star" class="star"/>
+                  </p>                  
                   <p>{{ overview }}</p>
               </div>
           </div>
@@ -84,10 +87,18 @@ export default {
             .back-card {
                 transform: rotateY(180deg);
                 background-color: rgb(58, 52, 52);
-                color: white;
                 text-align: center;
                 flex-direction: column;
                 justify-content: center;
+
+                img{
+                    width: 40px;
+                    margin: 0 auto;
+                }
+
+                .star{
+                    color: gold;
+                }
 
             }
                 }

@@ -24,6 +24,7 @@ export default {
             store.moviesArray = [];
             store.seriesArray = [];
             this.$emit("searchTerm", this.term);
+
         }
     }
 
@@ -33,7 +34,8 @@ export default {
 <template>
     <header class="py-3">
         <div class="container d-flex justify-content-between">
-            <div class="logo">
+            <div class="logo"
+                @click="clearBar()">
                 <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" class="img-fluid" alt="">
             </div>
             <form @submit.prevent="">
@@ -41,11 +43,11 @@ export default {
                     <input type="text" class="form-control" placeholder="Search..."
                             v-model="term"
                             @keyup.enter="startSearch()">
-                    <button class="btn btn-outline-secondary" type="button"
+                    <button class="btn btn-outline-secondary text-success" type="button"
                             @click="startSearch()">
                         Search
                     </button>
-                    <button class="btn btn-outline-secondary" type="button"
+                    <button class="btn btn-outline-secondary text-danger" type="button"
                             @click="clearBar()">
                         Delate
                     </button>
@@ -61,6 +63,7 @@ export default {
         background-color: black;
         .logo{
             width: 20%;
+            cursor: pointer;
         }
     }
 
